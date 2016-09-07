@@ -53,7 +53,7 @@ defmodule Ex02 do
   # if the first two elements of a list are equal                #
   ################################################################
 
-  first2equal = fn([a,b,_,_,_]) -> a == b end
+  first2equal = fn([a,b|rest]) -> a == b end
 
 
   assert  first2equal.([4, 4, 5, 6, 7])

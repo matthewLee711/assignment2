@@ -54,9 +54,16 @@ defmodule Ex03 do
   be used if needed.)
 
   """
+  #Matching allows for iteration
+  #Each recursive call moves to next unique
+  def odd_even([a|rest]), do:
+    cond do
+      Integer.is_odd(a)->[:odd|odd_even(a|rest)]
+      Integer.is_even(a)->[:even|odd_even(a|rest)]
+    end
+  end
 
-  def odd_even . . . "your code"
-
+  def odd_even([]), do: [] end
 
   ##############################################################################
   # 3.2:  5 points #
@@ -76,8 +83,14 @@ defmodule Ex03 do
       true
 
   """
+  def list_contains ([], value), do: false end
+  def list_contains ([a|rest], compare), do:
+    cond do
+      a == compare -> true
+      list_contains(a, compare)
+    end
+  end
 
-  def list_contains . .. "your code"
 
   ##############################################################################
   # 3.3:  5 points #
@@ -100,10 +113,9 @@ defmodule Ex03 do
       false
 
   """
-
-  def list_equal . . . "your code"
-
-
+  
+  def list_equal([],[]), do: true end
+  def list_equal([a1|b1],[a2|b2]), do a1 == a2 and list_equal(b1,b2)
 
   ##############################################################################
   # 3.4:  5 points #
