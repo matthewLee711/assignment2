@@ -60,9 +60,10 @@ defmodule Ex01 do
   # no explicit + operators in your function                          #
   #####################################################################
   #anonymous function..
-  sum3a = fn (num1, num2, num3) ->
-    sum2a.(num1, num2) + num3
-  end
+  # sum3a = fn (num1, num2, num3) ->
+  #   sum2a.(num1, num2)
+  # end
+  sum3a = &(&1 + &2 + &3)
 
   assert sum3a.(1, 3, 5)  == 9
   assert sum3a.(1, -3, 5) == 3
@@ -87,8 +88,8 @@ defmodule Ex01 do
   # sum of that parameter and the parameter passed to the first          #
   # function. The examples below will make this clearer :)               #
   ########################################################################
-
-  create_adder = fn(a) -> (fn -> a + 2 end) end
+  #pattern matched a with first input, pattern matched b with second input.
+  create_adder = fn(a) -> (fn(b) -> a + b end) end
 
   add_2  = create_adder.(2)
   add_99 = create_adder.(99)
