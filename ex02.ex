@@ -30,7 +30,7 @@ defmodule Ex02 do
   # numbers, and second should be the difference                         #
   ########################################################################
 
-  list2a = your_anonymous_function(1, 2)
+  list2a = fn (a, b) -> [a+b, a-b] end
 
   assert list2a.(1, 2)    == [ 3, -1 ]
   assert list2a.(-1, 100) == [ 99, -101 ]
@@ -60,5 +60,3 @@ defmodule Ex02 do
   assert !first2equal.([4, 5, 6, 7, 8])
 
 end
-
-
