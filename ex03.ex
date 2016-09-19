@@ -56,14 +56,17 @@ defmodule Ex03 do
   """
   #Matching allows for iteration
   #Each recursive call moves to next unique
-  def odd_even([a|rest]), do:
+  def is_odd_is_even(num) do
     cond do
-      Integer.is_odd(a)->[:odd|odd_even(a|rest)]
-      Integer.is_even(a)->[:even|odd_even(a|rest)]
+      Integer.is_odd  num -> :odd
+      Integer.is_even num -> :even
     end
   end
 
-  def odd_even([]), do: [] end
+  def odd_even([]),           do: []
+  def odd_even([first|rest]), do: [is_odd_is_even(first) | odd_even(rest)]
+
+  # def odd_even([]), do: []
 
   ##############################################################################
   # 3.2:  5 points #
@@ -83,14 +86,8 @@ defmodule Ex03 do
       true
 
   """
-  def list_contains ([], value), do: false end
-  def list_contains ([a|rest], compare), do:
-    cond do
-      a == compare -> true
-      list_contains(a, compare)
-    end
-  end
-
+  def list_contains([]),           do: false
+  def list_contains([h|t], value), do: h==value or list_contains(t, value)
 
   ##############################################################################
   # 3.3:  5 points #
@@ -113,9 +110,12 @@ defmodule Ex03 do
       false
 
   """
-  
-  def list_equal([],[]), do: true end
-  def list_equal([a1|b1],[a2|b2]), do a1 == a2 and list_equal(b1,b2)
+
+  def list_equal([h1|_t1], [h2|_t2]) when h1 != h2, do: false
+  def list_equal([h1|t1], [h2|t2]) when h1 == h2, do: list_equal(t1, t2)
+  def list_equal([], []), do: true
+  def list_equal([], _list), do: false
+  def list_equal(_list, []), do: false
 
   ##############################################################################
   # 3.4:  5 points #
@@ -161,7 +161,23 @@ defmodule Ex03 do
   Think a little about a nice way to lay this code out.
   """
 
-  def won . . . "your code"
+  def won(board) do
+    case board do
+      # Horizontal Solution
+      {x, x, x, _, _, _, _, _, _} -> x
+      {_, _, _, x, x, x, _, _, _} -> x
+      {_, _, _, _, _, _, x, x, x} -> x
+      # Vertical Solution
+      {x, _, _, x, _, _, x, _, _} -> x
+      {_, x, _, _, x, _, _, x, _} -> x
+      {_, _, x, _, _, x, _, _, x} -> x
+      # Diagonal Solution
+      {x, _, _, _, x, _, _, _, x} -> x
+      {_, _, x, _, x, _, x, _, _} -> x
+      # No win
+      _ -> false
+    end
+  end
 
 
   ###########################
